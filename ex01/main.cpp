@@ -6,7 +6,7 @@
 /*   By: mac <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 17:16:04 by mac               #+#    #+#             */
-/*   Updated: 2021/08/26 16:18:36 by mac              ###   ########.fr       */
+/*   Updated: 2021/09/06 17:12:33 by juhpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ int main()
 		std::cout << "failed!" << std::endl;
 		std::cout << e.what() << std::endl;
 	}
+	
 	std::cout << "-------------10000-----------" << std::endl;
 	Span ss = Span(10000);
 	try
 	{
-		ss.addNumber(0, 9999);
+		ss.addNumber(0, 300);
 		std::cout << ss.shortestSpan() << std::endl;
 		std::cout << ss.longestSpan() << std::endl;
 	}
@@ -44,5 +45,6 @@ int main()
 	{
 		std::cout << "Failed!" << std::endl;
 	}
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mac <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 17:48:27 by mac               #+#    #+#             */
-/*   Updated: 2021/09/06 10:30:22 by juhpark          ###   ########.fr       */
+/*   Updated: 2021/09/06 18:19:55 by juhpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ Span &Span::operator =(const Span &S)
 void Span::addNumber(int num)
 {
 	if (find(arr.begin(), arr.end(), num) != arr.end() || Span::indx == (int)arr.capacity())
-		throw(std::exception());
+		throw (std::exception());
 //	std::cout << "before : " << arr.capacity() << std::endl;
 	arr[Span::indx] = num;
 	std::cout << Span::indx << " : " << arr[Span::indx] << std::endl;
@@ -69,9 +69,9 @@ void Span::addNumber(unsigned int be, unsigned int nd)
 			start--;
 			continue ;
 		}
-		arr[be + i] = ran;
-		if (i >= 9990)
-			std::cout << i << " val : " << arr[be + i] << std::endl;
+		arr[(int)be + i] = ran;
+//		if (i >= 9990)
+//			std::cout << i << " val : " << arr[be + i] << std::endl;
 		i++;
 	}
 	Span::indx = (int)nd + 1;
@@ -81,18 +81,30 @@ void Span::addNumber(unsigned int be, unsigned int nd)
 //2. sort시켜서 구하기 ->이게 젤 현실적인듯
 unsigned int Span::shortestSpan(void)
 {
-	if (Span::indx < 2) // = if (arr.size() < 2)
+	if (Span::indx < 2) // = if (arr.size() < 2) 인줄 싶었지만 resize한것부턴 그것대로
 		throw (std::exception());
 	std::vector<int> tmp;
-	tmp.resize((unsigned int)arr.capacity());
-	std::copy(arr.begin(), arr.end() - 1, tmp.begin());
+	tmp.resize((unsigned int)Span::indx - 1);
+	std::cout << "copa : " << arr.capacity() << " size : " << tmp.size() << std::endl;
+	std::copy(arr.begin(), arr.begin() + Span::indx - 1, tmp.begin());
 	sort(tmp.begin(), tmp.end());
-	shortest = tmp[1] - tmp[0];
-	for (std::vector<int>::iterator it; it + 1 < tmp.end(); it++)
+	shortest = tmp[0] - tmp[1]; //0이 가끔씩 나오는데 그건 기존보다 1 더 많게 할당을 해버려서 resize에서 디폴트 값인 0이 나오게 된다
+//	for (std::vector<int>::iterator it = tmp.begin(); it + 1 < tmp.end(); it++)
+//	{
+//		std::cout << *it << std::endl;
+//	}
+//	std::cout << "------------" << std::endl;
+//	int i = 0;
+//	for (std::vector<int>::iterator it = arr.begin(); it < arr.end(); it++)
+//	{
+//		std::cout << *it << std::endl;
+//		std::cout << "i : " << i << std::endl;
+//		i++;
+//	}
+	for (std::vector<int>::iterator it = tmp.begin(); it + 1 < tmp.end(); it++)
 	{
 		if ((unsigned int)(*(it + 1) - *it) < shortest)
 		{
-			std::cout << *it << std::endl;
 			shortest = *(it + 1) - *it;
 			if (shortest == 1) //킹론상 0은 같은거 아님 안나옴, 근데 같은경우는 없음 그럼 1이지
 				break ;
@@ -104,7 +116,7 @@ unsigned int Span::shortestSpan(void)
 unsigned int Span::longestSpan(void)
 {
 	if (Span::indx < 2)
-		throw(std::exception());
+		throw (std::exception());
 	int max;
 	max = *max_element(arr.begin(), arr.end());//알고리즘에 최대 최소값 구하는 친구가 있다
 	int min;
