@@ -6,7 +6,7 @@
 /*   By: mac <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 17:48:27 by mac               #+#    #+#             */
-/*   Updated: 2021/09/06 18:19:55 by juhpark          ###   ########.fr       */
+/*   Updated: 2021/09/07 17:32:17 by juhpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,9 @@ unsigned int Span::shortestSpan(void)
 		throw (std::exception());
 	std::vector<int> tmp;
 	tmp.resize((unsigned int)Span::indx - 1);
-	std::cout << "copa : " << arr.capacity() << " size : " << tmp.size() << std::endl;
 	std::copy(arr.begin(), arr.begin() + Span::indx - 1, tmp.begin());
 	sort(tmp.begin(), tmp.end());
 	shortest = tmp[0] - tmp[1]; //0이 가끔씩 나오는데 그건 기존보다 1 더 많게 할당을 해버려서 resize에서 디폴트 값인 0이 나오게 된다
-//	for (std::vector<int>::iterator it = tmp.begin(); it + 1 < tmp.end(); it++)
-//	{
-//		std::cout << *it << std::endl;
-//	}
-//	std::cout << "------------" << std::endl;
-//	int i = 0;
-//	for (std::vector<int>::iterator it = arr.begin(); it < arr.end(); it++)
-//	{
-//		std::cout << *it << std::endl;
-//		std::cout << "i : " << i << std::endl;
-//		i++;
-//	}
 	for (std::vector<int>::iterator it = tmp.begin(); it + 1 < tmp.end(); it++)
 	{
 		if ((unsigned int)(*(it + 1) - *it) < shortest)

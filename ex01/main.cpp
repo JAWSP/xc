@@ -6,7 +6,7 @@
 /*   By: mac <marvin@42.fr>                         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 17:16:04 by mac               #+#    #+#             */
-/*   Updated: 2021/09/06 17:12:33 by juhpark          ###   ########.fr       */
+/*   Updated: 2021/09/07 17:32:37 by juhpark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main()
 	Span ss = Span(10000);
 	try
 	{
-		ss.addNumber(0, 300);
+		ss.addNumber(0, 9999);
 		std::cout << ss.shortestSpan() << std::endl;
 		std::cout << ss.longestSpan() << std::endl;
 	}
